@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
+import 'package:medical/features/presentation/auth/forget_password/forget_password.dart';
 import 'package:medical/features/presentation/auth/sign_in/sign_in_screen.dart';
 import 'package:medical/features/presentation/auth/sign_up/sign_up_screen.dart';
 import 'package:medical/features/presentation/layout/home/home_screen.dart';
@@ -27,6 +28,9 @@ class AppRoutes {
 
       case PageRouteName.home:
         return MaterialPageRoute(builder: (context) => HomeScreen());
+
+      case PageRouteName.forgetPassword:
+        return MaterialPageRoute(builder: (context) => ForgetPassword());
 
       default:
         return MaterialPageRoute(builder: (context) => SplashScreen());

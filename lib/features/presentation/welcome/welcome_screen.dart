@@ -31,7 +31,6 @@ class WelcomeScreen extends StatelessWidget {
             text: "Log In",
             textColor: AppColor.white,
             buttonColor: AppColor.primary,
-            width: size.width * 0.5,
             onPressed: () {
               navigatorKey.currentState!.pushNamed(PageRouteName.signIn);
             },
@@ -41,7 +40,6 @@ class WelcomeScreen extends StatelessWidget {
             text: "Sign Up",
             textColor: AppColor.primary,
             buttonColor: AppColor.gray,
-            width: size.width * 0.5,
             onPressed: () {
               navigatorKey.currentState!.pushNamed(PageRouteName.signUp);
             },
