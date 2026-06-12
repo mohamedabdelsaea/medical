@@ -5,6 +5,8 @@ import 'package:medical/features/data/widgets/custom_button.dart';
 import 'package:medical/features/data/widgets/custom_text_form_field.dart';
 import 'package:medical/main.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -18,6 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var local = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,9 +30,8 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
-        centerTitle: true,
         title: Text(
-          "Log In",
+          local!.logIn,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -45,7 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               SizedBox(height: 30),
               Text(
-                "Welcome",
+                local.welcome,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -63,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               SizedBox(height: 40),
               Text(
-                "Email",
+                local.email,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -78,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               SizedBox(height: 40),
               Text(
-                "Password",
+                local.password,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -110,7 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Align(
                 alignment: Alignment.center,
                 child: CustomButton(
-                  text: "Log In",
+                  text: local.logIn,
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
                   onPressed: () {
@@ -163,7 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       );
                     },
                     child: Text(
-                      "Sign Up",
+                      local.signUp,
                       style: TextStyle(color: AppColor.primary),
                     ),
                   ),

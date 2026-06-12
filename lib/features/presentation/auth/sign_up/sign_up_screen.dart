@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medical/features/data/widgets/custom_button.dart';
-
 import '../../../../core/route/page_route_name.dart';
 import '../../../../core/theme/app_color.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../main.dart';
 import '../../../data/widgets/custom_text_form_field.dart';
 
@@ -12,6 +12,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -20,9 +21,8 @@ class SignUpScreen extends StatelessWidget {
           },
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
-        centerTitle: true,
         title: Text(
-          "New Account",
+          local!.newAccount,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               SizedBox(height: 10),
               Text(
-                "Full Name",
+                local.fullName,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Password",
+                local.password,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Email",
+                local.email,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Phone",
+                local.phone,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -94,12 +94,12 @@ class SignUpScreen extends StatelessWidget {
               CustomTextFormField(
                 width: size.width * 0.9,
                 isPassword: false,
-                hintText: "Phone",
+                hintText: local.phone,
                 keyboardType: TextInputType.numberWithOptions(),
               ),
               SizedBox(height: 10),
               Text(
-                "Date Of Birth",
+                local.dateOfBirth,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: CustomButton(
-                  text: "Sign Up",
+                  text: local.signUp,
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
                   onPressed: () {
@@ -134,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
                       navigatorKey.currentState!.pushNamed(PageRouteName.signIn);
                     },
                     child: Text(
-                      "Log In ",
+                      local.logIn,
                       style: TextStyle(color: AppColor.primary),
                     ),
                   ),

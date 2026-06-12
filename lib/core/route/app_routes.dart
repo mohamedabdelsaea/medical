@@ -3,8 +3,12 @@ import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/features/presentation/auth/forget_password/forget_password.dart';
 import 'package:medical/features/presentation/auth/sign_in/sign_in_screen.dart';
 import 'package:medical/features/presentation/auth/sign_up/sign_up_screen.dart';
+import 'package:medical/features/presentation/doctor/doctor_screen.dart';
+import 'package:medical/features/presentation/favourite/favourite_screen.dart';
 import 'package:medical/features/presentation/layout/home/home_screen.dart';
 import 'package:medical/features/presentation/layout/layout_screen.dart';
+import 'package:medical/features/presentation/notification/notification_screen.dart';
+import 'package:medical/features/presentation/setting/setting_screen.dart';
 import 'package:medical/features/presentation/splash/splash_screen.dart';
 import 'package:medical/features/presentation/welcome/welcome_screen.dart';
 
@@ -31,6 +35,18 @@ class AppRoutes {
 
       case PageRouteName.forgetPassword:
         return MaterialPageRoute(builder: (context) => ForgetPassword());
+
+      case PageRouteName.setting:
+        return MaterialPageRoute(builder: (context) => SettingScreen());
+
+      case PageRouteName.doctor:
+        return MaterialPageRoute(builder: (context) => DoctorScreen());
+
+      case PageRouteName.favourite:
+        return MaterialPageRoute(builder: (context) => FavouriteScreen());
+
+      case PageRouteName.notification:
+        return MaterialPageRoute(builder: (context) => NotificationScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => SplashScreen());

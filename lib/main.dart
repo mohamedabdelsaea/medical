@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical/core/route/app_routes.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_theme.dart';
+import 'package:medical/features/domain/manager/home_cubit.dart';
+import 'l10n/app_localizations.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(create: (context) => HomeCubit(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +23,9 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: AppRoutes.onGenerateRoute,
       initialRoute: PageRouteName.initial,
       theme: AppTheme.lightTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale("en"),
     );
   }
 }

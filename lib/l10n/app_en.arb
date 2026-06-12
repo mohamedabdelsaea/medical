@@ -1,0 +1,18 @@
+{
+  "welcome": "Welcome",
+  "logIn": "log In",
+  "signUp": "Sign Up",
+  "home": "Home",
+  "chat": "Chat",
+  "profile": "Profile",
+  "calender": "Calender",
+  "logOut": "Log Out",
+  "newAccount": "New Account",
+  "setting": "Setting",
+  "clinics": "Clinics",
+  "email": "Email",
+  "password": "Password",
+  "fullName": "Full Name",
+  "phone": "Phone",
+  "dateOfBirth": "Date Of Birth"
+}

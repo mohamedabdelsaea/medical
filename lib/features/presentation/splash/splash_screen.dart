@@ -5,6 +5,8 @@ import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/main.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -27,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var local = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: Center(
@@ -39,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 30),
             Text(
-              'Clinics',
+              local!.clinics,
               style: TextStyle(
                 color: AppColor.white,
                 fontWeight: FontWeight.w500,

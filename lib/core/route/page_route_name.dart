@@ -7,4 +7,8 @@ class PageRouteName {
   static const String forgetPassword = "forgetPassword" ;
   static const String layout = "layout" ;
   static const String home = "home" ;
+  static const String notification = "notification" ;
+  static const String setting = "setting" ;
+  static const String doctor = "doctor" ;
+  static const String favourite = "favourite" ;
 }
