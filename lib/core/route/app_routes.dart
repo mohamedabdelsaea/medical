@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
+import 'package:medical/features/presentation/as_profile/help/help_screen.dart';
+import 'package:medical/features/presentation/as_profile/payment/payment_screen.dart';
+import 'package:medical/features/presentation/as_profile/privacy/privacy_screen.dart';
 import 'package:medical/features/presentation/auth/forget_password/forget_password.dart';
 import 'package:medical/features/presentation/auth/sign_in/sign_in_screen.dart';
 import 'package:medical/features/presentation/auth/sign_up/sign_up_screen.dart';
@@ -7,10 +10,11 @@ import 'package:medical/features/presentation/doctor/doctor_screen.dart';
 import 'package:medical/features/presentation/favourite/favourite_screen.dart';
 import 'package:medical/features/presentation/layout/home/home_screen.dart';
 import 'package:medical/features/presentation/layout/layout_screen.dart';
-import 'package:medical/features/presentation/notification/notification_screen.dart';
-import 'package:medical/features/presentation/setting/setting_screen.dart';
+import 'package:medical/features/presentation/layout/profile/edit_profile.dart';
 import 'package:medical/features/presentation/splash/splash_screen.dart';
 import 'package:medical/features/presentation/welcome/welcome_screen.dart';
+import '../../features/presentation/as_profile/notification/notification_screen.dart';
+import '../../features/presentation/as_profile/setting/setting_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings setting) {
@@ -47,6 +51,18 @@ class AppRoutes {
 
       case PageRouteName.notification:
         return MaterialPageRoute(builder: (context) => NotificationScreen());
+
+      case PageRouteName.editProfile:
+        return MaterialPageRoute(builder: (context) => EditProfile());
+
+      case PageRouteName.payment:
+        return MaterialPageRoute(builder: (context) => PaymentScreen());
+
+      case PageRouteName.privacy:
+        return MaterialPageRoute(builder: (context) => PrivacyScreen());
+
+      case PageRouteName.help:
+        return MaterialPageRoute(builder: (context) => HelpScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => SplashScreen());

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/app_color.dart';
-import '../../../main.dart';
+import '../../../../core/theme/app_color.dart';
+import '../../../../main.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,13 @@ class NotificationScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Notification",
+          "Setting",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: AppColor.primary,
           ),
         ),
-
       ),
     );
   }
