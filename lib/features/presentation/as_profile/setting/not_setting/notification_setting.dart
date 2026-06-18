@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_color.dart';
-import '../../../../main.dart';
+import '../../../../../core/theme/app_color.dart';
+import '../../../../../main.dart';
 
-class HelpScreen extends StatelessWidget {
-  const HelpScreen({super.key});
+class NotificationSetting extends StatelessWidget {
+  const NotificationSetting({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.primary,
         leading: IconButton(
           onPressed: () {
             navigatorKey.currentState!.pop();
           },
-          icon: Icon(Icons.arrow_back_ios_new, color: AppColor.white),
+          icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Help Center",
+          "Notification Setting",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: AppColor.white,
+            color: AppColor.primary,
           ),
         ),
       ),

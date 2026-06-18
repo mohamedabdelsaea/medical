@@ -3,6 +3,8 @@ import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/features/presentation/as_profile/help/help_screen.dart';
 import 'package:medical/features/presentation/as_profile/payment/payment_screen.dart';
 import 'package:medical/features/presentation/as_profile/privacy/privacy_screen.dart';
+import 'package:medical/features/presentation/as_profile/setting/not_setting/notification_setting.dart';
+import 'package:medical/features/presentation/as_profile/setting/pass_manager/password_manager.dart';
 import 'package:medical/features/presentation/auth/forget_password/forget_password.dart';
 import 'package:medical/features/presentation/auth/sign_in/sign_in_screen.dart';
 import 'package:medical/features/presentation/auth/sign_up/sign_up_screen.dart';
@@ -63,6 +65,12 @@ class AppRoutes {
 
       case PageRouteName.help:
         return MaterialPageRoute(builder: (context) => HelpScreen());
+
+      case PageRouteName.PassManager:
+        return MaterialPageRoute(builder: (context) => PasswordManager());
+
+      case PageRouteName.notSetting:
+        return MaterialPageRoute(builder: (context) => NotificationSetting());
 
       default:
         return MaterialPageRoute(builder: (context) => SplashScreen());

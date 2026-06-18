@@ -28,4 +28,8 @@ class PageRouteName {
   static const String help = "help";
 
   static const String payment = "payment";
+
+  static const String notSetting = "notSetting";
+
+  static const String PassManager = "PassManager";
 }

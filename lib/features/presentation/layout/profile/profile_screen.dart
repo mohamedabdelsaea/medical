@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
+import 'package:medical/features/data/widgets/custom_button_sheet.dart';
 import 'package:medical/features/data/widgets/custom_profile_item.dart';
-
 import '../../../../core/theme/app_color.dart';
-import '../../../../main.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -80,7 +78,9 @@ class ProfileScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  CustomButtonSheet.show(context);
+                },
                 child: Row(
                   children: [
                     Container(
