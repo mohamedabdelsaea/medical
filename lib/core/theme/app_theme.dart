@@ -11,7 +11,7 @@ class AppTheme {
       surfaceTintColor: Colors.transparent,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColor.black,
+        statusBarColor: AppColor.white,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness:Brightness.dark
       ),
