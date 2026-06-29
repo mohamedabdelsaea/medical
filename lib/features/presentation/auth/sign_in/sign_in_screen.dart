@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/core/utils/auth/auth_fire_base.dart';
+import 'package:medical/core/utils/auth/auth_gmail_and_face_book.dart';
 import 'package:medical/features/data/widgets/custom_button.dart';
 import 'package:medical/features/data/widgets/custom_text_form_field.dart';
 import 'package:medical/main.dart';
-
 import '../../../../l10n/app_localizations.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -81,6 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: size.width * 0.9,
                   isPassword: false,
                   hintText: "Enter Your Email",
+                  controller: AuthFireBase.loginEmailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your email";
@@ -107,6 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: size.width * 0.9,
                   isPassword: true,
                   hintText: "************",
+                  controller: AuthFireBase.loginPasswordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter password";
@@ -162,24 +164,48 @@ class _SignInScreenState extends State<SignInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppColor.gray,
-                        borderRadius: BorderRadius.circular(30),
+                    GestureDetector(
+                      onTap: () {
+                        AuthGmailAndFaceBook.signInWithGoogle().then((value) {
+                          if (value) {
+                            navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                              PageRouteName.layout,
+                              (route) => false,
+                            );
+                          }
+                        });
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppColor.gray,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Image.asset("assets/image/google.png"),
                       ),
-                      child: Image.asset("assets/image/google.png"),
                     ),
                     SizedBox(width: 20),
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppColor.gray,
-                        borderRadius: BorderRadius.circular(30),
+                    GestureDetector(
+                      onTap: () {
+                        AuthGmailAndFaceBook.signInWithFacebook().then((value) {
+                          if (value) {
+                            navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                              PageRouteName.layout,
+                              (route) => false,
+                            );
+                          }
+                        });
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppColor.gray,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Image.asset("assets/image/facebook.png"),
                       ),
-                      child: Image.asset("assets/image/facebook.png"),
                     ),
                   ],
                 ),

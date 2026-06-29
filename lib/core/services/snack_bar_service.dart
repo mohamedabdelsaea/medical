@@ -168,7 +168,7 @@ class SnackBarService {
         );
       },
       duration: const Duration(seconds: 3),
-      dismissDirections: [DismissDirection.endToStart],
+      dismissDirections: [DismissDirection.up],
     );
   }
 
@@ -336,7 +336,7 @@ class SnackBarService {
         );
       },
       duration: const Duration(seconds: 10),
-      dismissDirections: [DismissDirection.endToStart],
+      dismissDirections: [DismissDirection.up],
     );
   }
 }

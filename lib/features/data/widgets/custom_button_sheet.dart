@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
+import 'package:medical/core/utils/auth/auth_fire_base.dart';
 import 'package:medical/main.dart';
 
 class CustomButtonSheet {
@@ -67,8 +68,10 @@ class CustomButtonSheet {
                         ),
                       ),
                       onPressed: () {
-                        navigatorKey.currentState!.pushNamed(
-                          PageRouteName.signIn,
+                        AuthFireBase.logout();
+                        navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                          PageRouteName.welcome,
+                          (route) => false,
                         );
                       },
                       child: const Text(

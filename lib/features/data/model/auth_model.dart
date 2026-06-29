@@ -1,10 +1,10 @@
 class AuthModel {
-  final String uid;
-  final String name;
-  final String email;
-  final String phone;
-  final String birthDate;
-  final String image;
+  final String? uid;
+  final String? name;
+  final String? email;
+  final String? phone;
+  final String? birthDate;
+  final String? image;
 
   AuthModel({
     required this.uid,

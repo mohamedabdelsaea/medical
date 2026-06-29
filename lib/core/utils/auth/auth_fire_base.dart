@@ -11,6 +11,8 @@ import 'package:medical/features/data/model/auth_model.dart';
 class AuthFireBase {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   static final TextEditingController emailController = TextEditingController();
 
   static final TextEditingController phoneController = TextEditingController();
@@ -60,7 +62,7 @@ class AuthFireBase {
         image: '',
       );
 
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      await _firestore.collection('users').doc(user.uid).set({
         ...authModel.toJson(),
         'createdAt': FieldValue.serverTimestamp(),
       });
