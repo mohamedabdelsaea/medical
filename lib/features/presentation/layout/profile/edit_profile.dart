@@ -1,16 +1,49 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:medical/core/services/snack_bar_service.dart';
 import '../../../../core/theme/app_color.dart';
+import '../../../../core/utils/auth/auth_fire_base.dart';
+import '../../../../core/utils/auth/profile_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../main.dart';
+import '../../../data/image_packer/custom_profile_image.dart';
 import '../../../data/widgets/custom_button.dart';
 import '../../../data/widgets/custom_text_form_field.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
 
   @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  File? profileImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final profile = await ProfileService.getProfile();
+
+    if (profile == null) return;
+
+    AuthFireBase.nameController.text = profile.name!;
+    AuthFireBase.phoneController.text = profile.phone!;
+    AuthFireBase.emailController.text = profile.email!;
+    AuthFireBase.birthDateController.text = profile.birthDate!;
+
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -35,15 +68,13 @@ class EditProfile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: ClipOval(
-                  child: Image.asset(
-                    "assets/image/profile.png",
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              CustomProfileImage(
+                profileImage: profileImage,
+                onImageSelected: (image) {
+                  setState(() {
+                    profileImage = image;
+                  });
+                },
               ),
               SizedBox(height: 10),
               Text(
@@ -59,6 +90,7 @@ class EditProfile extends StatelessWidget {
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "Enter Your Full Name",
+                controller: AuthFireBase.nameController,
               ),
               SizedBox(height: 10),
               Text(
@@ -74,6 +106,7 @@ class EditProfile extends StatelessWidget {
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "+20112233456",
+                controller: AuthFireBase.phoneController,
                 keyboardType: TextInputType.numberWithOptions(),
               ),
               SizedBox(height: 10),
@@ -90,6 +123,7 @@ class EditProfile extends StatelessWidget {
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "Enter Your Email",
+                controller: AuthFireBase.emailController,
               ),
               SizedBox(height: 10),
               SizedBox(height: 10),
@@ -106,15 +140,37 @@ class EditProfile extends StatelessWidget {
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "DD / MM / YYYY",
+                controller: AuthFireBase.birthDateController,
               ),
-              SizedBox(height: size.height*0.1),
+              SizedBox(height: size.height * 0.1),
               Align(
                 alignment: Alignment.center,
                 child: CustomButton(
                   text: "Update Profile",
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await ProfileService.updateProfile(
+                      name: AuthFireBase.nameController.text.trim(),
+                      phone: AuthFireBase.phoneController.text.trim(),
+                      birthDate: AuthFireBase.birthDateController.text.trim(),
+                    );
+
+                    if (AuthFireBase.emailController.text.trim() !=
+                        AuthFireBase.currentEmail) {
+                      // اعرض Dialog يطلب كلمة المرور ثم:
+                      //
+                      // await ProfileService.updateEmail(
+                      //   newEmail: AuthFireBase.emailController.text.trim(),
+                      //   currentPassword: password,
+                      // );
+                    }
+
+                    if (mounted) {
+                      SnackBarService.showSuccessMessage(
+                          "Profile Updated Successfully");
+                    }
+                  },
                 ),
               ),
             ],

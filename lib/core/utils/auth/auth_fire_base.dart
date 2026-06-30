@@ -33,6 +33,10 @@ class AuthFireBase {
 
   static User? get currentUser => _auth.currentUser;
 
+  static String get currentName => _auth.currentUser?.displayName ?? "User";
+
+  static String get currentPhoto => _auth.currentUser?.photoURL ?? "";
+
   static bool get isLoggedIn => _auth.currentUser != null;
 
   static String? get currentUid => _auth.currentUser?.uid;

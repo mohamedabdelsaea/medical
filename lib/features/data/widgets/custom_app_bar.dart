@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical/core/utils/auth/auth_fire_base.dart';
 import '../../../core/route/page_route_name.dart';
 import '../../../core/theme/app_color.dart';
 import '../../../main.dart';
@@ -27,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: 10),
            Expanded(
             child: Text(
-              "Mohamed ",
+              AuthFireBase.currentName,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: AppColor.black),
               overflow: TextOverflow.ellipsis,
             ),

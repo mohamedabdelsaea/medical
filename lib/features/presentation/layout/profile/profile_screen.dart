@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
+import 'package:medical/core/utils/auth/auth_fire_base.dart';
 import 'package:medical/features/data/widgets/custom_button_sheet.dart';
 import 'package:medical/features/data/widgets/custom_profile_item.dart';
+import 'package:medical/main.dart';
 import '../../../../core/theme/app_color.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -35,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              "Mohamed",
+              AuthFireBase.currentName,
               style: TextStyle(color: AppColor.black, fontSize: 20),
             ),
             SizedBox(height: 30),
@@ -79,7 +81,16 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: GestureDetector(
                 onTap: () {
-                  CustomButtonSheet.show(context);
+                  CustomButtonSheet.show(
+                    context: context,
+                    onPressed: () {
+                      AuthFireBase.logout();
+                      navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                        PageRouteName.welcome,
+                        (route) => false,
+                      );
+                    },
+                  );
                 },
                 child: Row(
                   children: [

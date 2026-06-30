@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medical/core/utils/auth/profile_service.dart';
 import 'package:medical/features/data/widgets/custom_button.dart';
 import 'package:medical/features/data/widgets/custom_text_form_field.dart';
+import '../../../../../core/services/snack_bar_service.dart';
 import '../../../../../core/theme/app_color.dart';
 import '../../../../../main.dart';
 
@@ -48,6 +50,7 @@ class PasswordManager extends StatelessWidget {
                 width: double.infinity,
                 isPassword: true,
                 hintText: "*************",
+                controller: ProfileService.currentPasswordController,
               ),
               SizedBox(height: 30),
               Text(
@@ -63,6 +66,7 @@ class PasswordManager extends StatelessWidget {
                 width: double.infinity,
                 isPassword: true,
                 hintText: "*************",
+                controller: ProfileService.newPasswordController,
               ),
               SizedBox(height: 30),
               Text(
@@ -78,15 +82,32 @@ class PasswordManager extends StatelessWidget {
                 width: double.infinity,
                 isPassword: true,
                 hintText: "*************",
+                controller: ProfileService.confirmPasswordController,
               ),
               SizedBox(height: 240),
               SizedBox(
-                width: size.width*0.9,
+                width: size.width * 0.9,
                 child: CustomButton(
                   text: "Change Password",
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (ProfileService.newPasswordController.text !=
+                        ProfileService.confirmPasswordController.text) {
+                      SnackBarService.showErrorMessage(
+                        "Passwords do not match",
+                      );
+                      return;
+                    }
+
+                    await ProfileService.updatePassword();
+
+                    SnackBarService.showSuccessMessage(
+                      "Password changed successfully",
+                    );
+
+                    navigatorKey.currentState!.pop();
+                  },
                 ),
               ),
             ],

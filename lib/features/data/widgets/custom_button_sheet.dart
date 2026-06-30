@@ -1,53 +1,88 @@
 import 'package:flutter/material.dart';
-import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
-import 'package:medical/core/utils/auth/auth_fire_base.dart';
 import 'package:medical/main.dart';
 
 class CustomButtonSheet {
-  static void show(BuildContext context) {
+  static void show({
+    required BuildContext context,
+    required VoidCallback onPressed,
+    TextEditingController? passwordController,
+    String title = "Logout",
+    String message = "Are you sure you want to log out?",
+    String confirmText = "Yes",
+    String cancelText = "Cancel",
+  }) {
     showModalBottomSheet(
       backgroundColor: AppColor.white,
       context: context,
       isDismissible: true,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(18),
+          padding: EdgeInsets.only(
+            left: 18,
+            right: 18,
+            top: 18,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 18,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+
               Text(
-                "Logout",
+                title,
                 style: TextStyle(
                   fontSize: 22,
                   color: AppColor.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 14),
+
+              const SizedBox(height: 14),
+
               Text(
-                "are you sure you want to log out?",
-                style: TextStyle(fontSize: 15),
+                message,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 15),
               ),
-              SizedBox(height: 20),
+
+              if (passwordController != null) ...[
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Current Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
+
+              const SizedBox(height: 20),
+
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        minimumSize: WidgetStatePropertyAll(
+                        minimumSize: const WidgetStatePropertyAll(
                           Size(double.infinity, 50),
                         ),
-                        backgroundColor: WidgetStatePropertyAll(AppColor.gray),
+                        backgroundColor:
+                        WidgetStatePropertyAll(AppColor.gray),
                       ),
                       onPressed: () {
                         navigatorKey.currentState!.pop();
                       },
-                      child: const Text(
-                        "Cancel",
+                      child: Text(
+                        cancelText,
                         style: TextStyle(
                           fontSize: 22,
                           color: AppColor.primary,
@@ -56,27 +91,22 @@ class CustomButtonSheet {
                       ),
                     ),
                   ),
+
                   const SizedBox(width: 16),
+
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        minimumSize: WidgetStatePropertyAll(
+                        minimumSize: const WidgetStatePropertyAll(
                           Size(double.infinity, 50),
                         ),
-                        backgroundColor: WidgetStatePropertyAll(
-                          AppColor.primary,
-                        ),
+                        backgroundColor:
+                        WidgetStatePropertyAll(AppColor.primary),
                       ),
-                      onPressed: () {
-                        AuthFireBase.logout();
-                        navigatorKey.currentState!.pushNamedAndRemoveUntil(
-                          PageRouteName.welcome,
-                          (route) => false,
-                        );
-                      },
-                      child: const Text(
-                        "Yes Logout",
-                        style: TextStyle(
+                      onPressed: onPressed,
+                      child: Text(
+                        confirmText,
+                        style: const TextStyle(
                           fontSize: 22,
                           color: AppColor.white,
                           fontWeight: FontWeight.bold,
@@ -86,7 +116,8 @@ class CustomButtonSheet {
                   ),
                 ],
               ),
-              const SizedBox(height: 50),
+
+              const SizedBox(height: 20),
             ],
           ),
         );
