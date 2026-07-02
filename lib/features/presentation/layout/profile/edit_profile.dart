@@ -41,9 +41,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -167,8 +165,10 @@ class _EditProfileState extends State<EditProfile> {
                     }
 
                     if (mounted) {
+                      navigatorKey.currentState!.pop();
                       SnackBarService.showSuccessMessage(
-                          "Profile Updated Successfully");
+                        "Profile Updated Successfully",
+                      );
                     }
                   },
                 ),

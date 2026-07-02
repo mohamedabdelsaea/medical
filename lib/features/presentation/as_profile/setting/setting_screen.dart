@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/utils/auth/profile_service.dart';
 import 'package:medical/features/data/widgets/custom_button_sheet.dart';
-
 import '../../../../core/route/page_route_name.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../main.dart';
@@ -59,9 +58,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 CustomButtonSheet.show(
                   context: context,
                   passwordController: passwordController,
-                  title: "Delete Account",
-                  message: "Please enter your current password to continue.",
-                  confirmText: "Delete",
                   onPressed: () async {
                     await ProfileService.deleteAccount(
                       currentPassword: passwordController.text.trim(),

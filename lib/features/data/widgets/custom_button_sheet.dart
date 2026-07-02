@@ -1,16 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:medical/core/services/snack_bar_service.dart';
 import 'package:medical/core/theme/app_color.dart';
+import 'package:medical/features/data/widgets/custom_text_form_field.dart';
 import 'package:medical/main.dart';
 
 class CustomButtonSheet {
   static void show({
     required BuildContext context,
-    required VoidCallback onPressed,
+    required FutureOr<void> Function() onPressed,
     TextEditingController? passwordController,
     String title = "Logout",
     String message = "Are you sure you want to log out?",
     String confirmText = "Yes",
     String cancelText = "Cancel",
+    String? loadingMessage,
+    String? successMessage,
   }) {
     showModalBottomSheet(
       backgroundColor: AppColor.white,
@@ -21,6 +28,8 @@ class CustomButtonSheet {
         borderRadius: BorderRadius.circular(30),
       ),
       builder: (context) {
+        final size = MediaQuery.of(context).size;
+
         return Padding(
           padding: EdgeInsets.only(
             left: 18,
@@ -52,16 +61,11 @@ class CustomButtonSheet {
 
               if (passwordController != null) ...[
                 const SizedBox(height: 20),
-
-                TextField(
+                CustomTextFormField(
+                  width: size.width * 0.9,
+                  isPassword: true,
                   controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: "Current Password",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
+                  hintText: "Current Password",
                 ),
               ],
 
@@ -75,8 +79,9 @@ class CustomButtonSheet {
                         minimumSize: const WidgetStatePropertyAll(
                           Size(double.infinity, 50),
                         ),
-                        backgroundColor:
-                        WidgetStatePropertyAll(AppColor.gray),
+                        backgroundColor: WidgetStatePropertyAll(
+                          AppColor.gray,
+                        ),
                       ),
                       onPressed: () {
                         navigatorKey.currentState!.pop();
@@ -100,10 +105,36 @@ class CustomButtonSheet {
                         minimumSize: const WidgetStatePropertyAll(
                           Size(double.infinity, 50),
                         ),
-                        backgroundColor:
-                        WidgetStatePropertyAll(AppColor.primary),
+                        backgroundColor: WidgetStatePropertyAll(
+                          AppColor.primary,
+                        ),
                       ),
-                      onPressed: onPressed,
+                      onPressed: () async {
+                        navigatorKey.currentState!.pop();
+
+                        EasyLoading.show(
+                          status: loadingMessage ?? "Please wait...",
+                        );
+
+                        try {
+                          await onPressed();
+
+                          EasyLoading.dismiss();
+
+                          if (successMessage != null &&
+                              successMessage.isNotEmpty) {
+                            SnackBarService.showSuccessMessage(
+                              successMessage,
+                            );
+                          }
+                        } catch (e) {
+                          EasyLoading.dismiss();
+
+                          SnackBarService.showErrorMessage(
+                            e.toString(),
+                          );
+                        }
+                      },
                       child: Text(
                         confirmText,
                         style: const TextStyle(
