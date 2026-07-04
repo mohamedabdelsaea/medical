@@ -1,11 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:medical/core/services/snack_bar_service.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/features/data/widgets/custom_text_form_field.dart';
 import 'package:medical/main.dart';
+
+import '../../../l10n/app_localizations.dart';
+
 
 class CustomButtonSheet {
   static void show({
@@ -29,7 +31,7 @@ class CustomButtonSheet {
       ),
       builder: (context) {
         final size = MediaQuery.of(context).size;
-
+        var local = AppLocalizations.of(context);
         return Padding(
           padding: EdgeInsets.only(
             left: 18,
@@ -65,7 +67,7 @@ class CustomButtonSheet {
                   width: size.width * 0.9,
                   isPassword: true,
                   controller: passwordController,
-                  hintText: "Current Password",
+                  hintText: local!.currentPassword,
                 ),
               ],
 
@@ -96,9 +98,7 @@ class CustomButtonSheet {
                       ),
                     ),
                   ),
-
                   const SizedBox(width: 16),
-
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
@@ -111,7 +111,6 @@ class CustomButtonSheet {
                       ),
                       onPressed: () async {
                         navigatorKey.currentState!.pop();
-
                         EasyLoading.show(
                           status: loadingMessage ?? "Please wait...",
                         );

@@ -14,5 +14,20 @@
   "password": "كلمه السر",
   "fullName": "الاسم كامل",
   "phone": "رقم الهاتف",
-  "dateOfBirth": "تاريخ الميلاد"
+  "dateOfBirth": "تاريخ الميلاد",
+  "updateProfile": "تحديث الحساب ",
+  "favourite": "المفضله",
+  "payment": "طريقه الدفع",
+  "privacy": "الخصوصيه",
+  "help": "مساعده",
+  "doctor": "دكتور",
+  "notification": "الاشعارات",
+  "deleteAccount": "حذف الحساب",
+  "helpCenter": "مركز المساعده",
+  "currentPassword": "كلمه السر الحاليه",
+  "newPassword": "كلمه السر الجديده",
+  "confirmNewPassword": "تاكيد كلمه السر",
+  "changePassword": "تغير كلمه السر",
+  "cancel": "الغاء",
+  "yes": "تاكيد"
 }

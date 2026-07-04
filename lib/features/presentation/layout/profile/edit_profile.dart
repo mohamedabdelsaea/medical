@@ -52,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Update Profile",
+          local!.updateProfile,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class _EditProfileState extends State<EditProfile> {
               ),
               SizedBox(height: 10),
               Text(
-                local!.fullName,
+                local.fullName,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _EditProfileState extends State<EditProfile> {
               Align(
                 alignment: Alignment.center,
                 child: CustomButton(
-                  text: "Update Profile",
+                  text: local.updateProfile,
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
                   onPressed: () async {
@@ -155,14 +155,7 @@ class _EditProfileState extends State<EditProfile> {
                     );
 
                     if (AuthFireBase.emailController.text.trim() !=
-                        AuthFireBase.currentEmail) {
-                      // اعرض Dialog يطلب كلمة المرور ثم:
-                      //
-                      // await ProfileService.updateEmail(
-                      //   newEmail: AuthFireBase.emailController.text.trim(),
-                      //   currentPassword: password,
-                      // );
-                    }
+                        AuthFireBase.currentEmail) {}
 
                     if (mounted) {
                       navigatorKey.currentState!.pop();

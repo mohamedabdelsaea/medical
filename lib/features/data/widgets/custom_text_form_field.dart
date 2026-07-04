@@ -13,9 +13,13 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool enabled;
 
+  // اختياري
+  final Widget? prefixIcon;
+
   const CustomTextFormField({
     super.key,
     required this.width,
+    this.height,
     this.textColor,
     this.backgroundColor,
     required this.isPassword,
@@ -24,7 +28,7 @@ class CustomTextFormField extends StatefulWidget {
     this.validator,
     this.keyboardType,
     this.enabled = true,
-    this.height,
+    this.prefixIcon,
   });
 
   @override
@@ -46,48 +50,64 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         keyboardType: widget.keyboardType,
         enabled: widget.enabled,
         cursorColor: AppColor.primary,
-        style: TextStyle(color: widget.textColor ?? AppColor.primary),
+        style: TextStyle(
+          color: widget.textColor ?? AppColor.primary,
+        ),
         decoration: InputDecoration(
           filled: true,
           fillColor: widget.backgroundColor ?? AppColor.gray,
           hintText: widget.hintText,
-          hintStyle: TextStyle(color: (widget.textColor ?? AppColor.primary)),
+          hintStyle: TextStyle(
+            color: widget.textColor ?? AppColor.primary,
+          ),
+          prefixIcon: widget.prefixIcon,
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 16.0,
+            horizontal: 16,
+            vertical: 16,
           ),
           suffixIcon: widget.isPassword
               ? IconButton(
-                  icon: Icon(
-                    _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: AppColor.black,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                )
+            icon: Icon(
+              _obscureText
+                  ? Icons.visibility_off
+                  : Icons.visibility,
+              color: AppColor.black,
+            ),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          )
               : null,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
+            borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
+            borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
-            borderSide: BorderSide(color: AppColor.primary, width: 1.5),
+            borderRadius: BorderRadius.circular(18),
+            borderSide: BorderSide(
+              color: AppColor.primary,
+              width: 1.5,
+            ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
-            borderSide: BorderSide(color: Colors.red, width: 1.5),
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 1.5,
+            ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
-            borderSide: BorderSide(color: Colors.red, width: 1.5),
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 1.5,
+            ),
           ),
         ),
       ),

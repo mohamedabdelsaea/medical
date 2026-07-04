@@ -14,5 +14,20 @@
   "password": "Password",
   "fullName": "Full Name",
   "phone": "Phone",
-  "dateOfBirth": "Date Of Birth"
+  "dateOfBirth": "Date Of Birth",
+  "updateProfile": "Update Profile",
+  "favourite": "Favourite",
+  "payment": "Payment",
+  "privacy": "Privacy",
+  "help": "Help",
+  "doctor": "Doctor",
+  "notification": "Notification",
+  "deleteAccount": "Delete Account",
+  "helpCenter": "Help Center",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "changePassword": "Change Password",
+  "cancel": "Cancel",
+  "yes": "Yes"
 }

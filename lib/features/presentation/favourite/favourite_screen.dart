@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_color.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../main.dart';
 
 class  FavouriteScreen extends StatelessWidget {
@@ -8,6 +9,7 @@ class  FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -15,6 +17,14 @@ class  FavouriteScreen extends StatelessWidget {
             navigatorKey.currentState!.pop();
           },
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
+        ),
+        title: Text(
+          local!.favourite ,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: AppColor.primary,
+          ),
         ),
       ),
 

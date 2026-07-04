@@ -5,16 +5,18 @@ import 'package:medical/features/data/widgets/custom_button_sheet.dart';
 import 'package:medical/features/data/widgets/custom_profile_item.dart';
 import 'package:medical/main.dart';
 import '../../../../core/theme/app_color.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "My Profile",
+          local!.profile,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -42,39 +44,45 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             CustomProfileItem(
-              title: "Profile",
+              title: local.profile,
               icon: Icons.person,
               routeName: PageRouteName.editProfile,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
-              title: "Favourite",
+              title: local.favourite,
               icon: Icons.favorite_border,
               routeName: PageRouteName.favourite,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
-              title: "Payment",
+              title: local.payment,
               icon: Icons.payment_outlined,
               routeName: PageRouteName.payment,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
-              title: "Privacy Policy",
+              title: local.privacy,
               icon: Icons.privacy_tip_outlined,
               routeName: PageRouteName.privacy,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
-              title: "Setting",
+              title: local.setting,
               icon: Icons.settings,
               routeName: PageRouteName.setting,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
-              title: "Help",
+              title: local.help,
               icon: Icons.help,
               routeName: PageRouteName.help,
+              trailing:   Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             Padding(
@@ -82,6 +90,9 @@ class ProfileScreen extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   CustomButtonSheet.show(
+                    title: local.logOut,
+                    cancelText: local.cancel,
+                    confirmText: local.yes,
                     context: context,
                     onPressed: () {
                       AuthFireBase.logout();
@@ -109,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 20),
                     Text(
-                      "Log Out",
+                      local.logOut,
                       style: const TextStyle(
                         color: AppColor.black,
                         fontSize: 20,

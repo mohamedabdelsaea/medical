@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medical/features/data/widgets/custom_switch.dart';
 
 import '../../../../../core/theme/app_color.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../main.dart';
 
 class NotificationSetting extends StatefulWidget {
@@ -16,6 +17,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -25,7 +27,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Notification Setting",
+          local!.notification,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,

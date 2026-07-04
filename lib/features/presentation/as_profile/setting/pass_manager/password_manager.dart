@@ -4,6 +4,7 @@ import 'package:medical/features/data/widgets/custom_button.dart';
 import 'package:medical/features/data/widgets/custom_text_form_field.dart';
 import '../../../../../core/services/snack_bar_service.dart';
 import '../../../../../core/theme/app_color.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../main.dart';
 
 class PasswordManager extends StatelessWidget {
@@ -12,6 +13,7 @@ class PasswordManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -21,7 +23,7 @@ class PasswordManager extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "password manager",
+          local!.password,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -38,7 +40,7 @@ class PasswordManager extends StatelessWidget {
             children: [
               SizedBox(height: 40),
               Text(
-                "Current Password",
+               local.currentPassword,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 22,
@@ -54,7 +56,7 @@ class PasswordManager extends StatelessWidget {
               ),
               SizedBox(height: 30),
               Text(
-                "New Password",
+                local.newPassword,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 22,
@@ -70,7 +72,7 @@ class PasswordManager extends StatelessWidget {
               ),
               SizedBox(height: 30),
               Text(
-                "Confirm New Password",
+                local.confirmNewPassword,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 22,
@@ -88,7 +90,7 @@ class PasswordManager extends StatelessWidget {
               SizedBox(
                 width: size.width * 0.9,
                 child: CustomButton(
-                  text: "Change Password",
+                  text: local.changePassword,
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
                   onPressed: () async {

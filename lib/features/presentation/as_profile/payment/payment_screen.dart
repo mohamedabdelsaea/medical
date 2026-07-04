@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_color.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../main.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -8,6 +9,7 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -17,7 +19,7 @@ class PaymentScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Payment Method",
+          local!.payment,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,

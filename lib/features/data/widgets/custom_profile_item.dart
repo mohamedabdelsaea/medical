@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_color.dart';
@@ -8,12 +7,14 @@ class CustomProfileItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
-    required this.routeName,
+    required this.trailing,
+    this.routeName,
   });
 
   final String title;
   final IconData icon;
-  final String routeName;
+  final IconData trailing;
+  final String? routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,9 @@ class CustomProfileItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, routeName);
+          if (routeName != null) {
+            Navigator.pushNamed(context, routeName!);
+          }
         },
         child: Row(
           children: [
@@ -48,9 +51,10 @@ class CustomProfileItem extends StatelessWidget {
             ),
             const Spacer(),
             Icon(
-              Icons.arrow_forward_ios_outlined,
+              trailing,
               color: AppColor.primary,
-              size: 26,
+              size: 22,
+               fontWeight: FontWeight.bold,
             ),
           ],
         ),

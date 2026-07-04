@@ -55,4 +55,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dateOfBirth => 'تاريخ الميلاد';
+
+  @override
+  String get updateProfile => 'تحديث الحساب ';
+
+  @override
+  String get favourite => 'المفضله';
+
+  @override
+  String get payment => 'طريقه الدفع';
+
+  @override
+  String get privacy => 'الخصوصيه';
+
+  @override
+  String get help => 'مساعده';
+
+  @override
+  String get doctor => 'دكتور';
+
+  @override
+  String get notification => 'الاشعارات';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get helpCenter => 'مركز المساعده';
+
+  @override
+  String get currentPassword => 'كلمه السر الحاليه';
+
+  @override
+  String get newPassword => 'كلمه السر الجديده';
+
+  @override
+  String get confirmNewPassword => 'تاكيد كلمه السر';
+
+  @override
+  String get changePassword => 'تغير كلمه السر';
+
+  @override
+  String get cancel => 'الغاء';
+
+  @override
+  String get yes => 'تاكيد';
 }

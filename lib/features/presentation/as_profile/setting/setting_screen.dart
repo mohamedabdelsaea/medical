@@ -3,6 +3,7 @@ import 'package:medical/core/utils/auth/profile_service.dart';
 import 'package:medical/features/data/widgets/custom_button_sheet.dart';
 import '../../../../core/route/page_route_name.dart';
 import '../../../../core/theme/app_color.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../main.dart';
 import '../../../data/widgets/custom_profile_item.dart';
 
@@ -18,6 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -27,7 +29,7 @@ class _SettingScreenState extends State<SettingScreen> {
           icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
         ),
         title: Text(
-          "Setting",
+          local!.setting,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -40,15 +42,17 @@ class _SettingScreenState extends State<SettingScreen> {
         children: [
           SizedBox(height: 40),
           CustomProfileItem(
-            title: "Notification Setting",
+            title: local.notification,
             icon: Icons.lightbulb_outline_sharp,
             routeName: PageRouteName.notSetting,
+            trailing:   Icons.arrow_forward_ios_outlined,
           ),
           SizedBox(height: 30),
           CustomProfileItem(
-            title: "Password Manager",
+            title: local.password,
             icon: Icons.key,
             routeName: PageRouteName.PassManager,
+            trailing:   Icons.arrow_forward_ios_outlined,
           ),
           SizedBox(height: 30),
           Padding(
@@ -56,6 +60,9 @@ class _SettingScreenState extends State<SettingScreen> {
             child: GestureDetector(
               onTap: () {
                 CustomButtonSheet.show(
+                  title: local.logOut,
+                  cancelText: local.cancel,
+                  confirmText: local.yes,
                   context: context,
                   passwordController: passwordController,
                   onPressed: () async {
@@ -86,7 +93,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   const SizedBox(width: 20),
                   Text(
-                    "Delete Account",
+                    local.deleteAccount,
                     style: const TextStyle(color: AppColor.black, fontSize: 20),
                   ),
                   const Spacer(),
