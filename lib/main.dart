@@ -25,16 +25,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: PageRouteName.initial,
-      theme: AppTheme.lightTheme,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale("en"),
-      builder: EasyLoading.init(builder: BotToastInit()),
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
+          onGenerateRoute: AppRoutes.onGenerateRoute,
+          initialRoute: PageRouteName.initial,
+          theme: AppTheme.lightTheme,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: HomeCubit.get(context).locale,
+          builder: EasyLoading.init(builder: BotToastInit()),
+        );
+      },
     );
   }
 }

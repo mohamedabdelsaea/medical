@@ -99,5 +99,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancel => 'الغاء';
 
   @override
+  String get language => 'اللغه';
+
+  @override
   String get yes => 'تاكيد';
+
+  @override
+  String get welcomeHome =>
+      'سيخضع المريض للمراقبة والرعاية،\n وسيتم تقديم كل ما يلزم له.';
 }

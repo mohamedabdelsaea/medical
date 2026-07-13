@@ -213,6 +213,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Image.asset("assets/image/facebook.png"),
                       ),
                     ),
+                    SizedBox(width: 20),
                   ],
                 ),
                 SizedBox(height: 20),

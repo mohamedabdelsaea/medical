@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical/core/utils/auth/auth_fire_base.dart';
+import 'package:medical/features/domain/manager/home_cubit.dart';
 import '../../../core/route/page_route_name.dart';
 import '../../../core/theme/app_color.dart';
 import '../../../main.dart';
@@ -26,16 +27,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           const SizedBox(width: 10),
-           Expanded(
+          Expanded(
             child: Text(
               AuthFireBase.currentName,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: AppColor.black),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: AppColor.black,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
       ),
       actions: [
+        IconButton(
+          onPressed: () {
+            HomeCubit.get(context).changeLanguage();
+          },
+          icon: Container(
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              color: AppColor.gray,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.language, color: AppColor.black, size: 25),
+          ),
+        ),
         IconButton(
           onPressed: () {
             navigatorKey.currentState!.pushNamed(PageRouteName.notification);
@@ -69,7 +88,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: const Icon(Icons.settings, color: AppColor.black, size: 20),
           ),
         ),
-
         const SizedBox(width: 10),
       ],
     );

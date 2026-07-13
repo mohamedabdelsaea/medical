@@ -99,5 +99,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get language => 'language';
+
+  @override
   String get yes => 'Yes';
+
+  @override
+  String get welcomeHome =>
+      'The patient will be monitored, cared for,\n and everything necessary \n will be done for him/her.';
 }

@@ -278,11 +278,23 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'language'**
+  String get language;
+
   /// No description provided for @yes.
   ///
   /// In en, this message translates to:
   /// **'Yes'**
   String get yes;
+
+  /// No description provided for @welcomeHome.
+  ///
+  /// In en, this message translates to:
+  /// **'The patient will be monitored, cared for,\n and everything necessary \n will be done for him/her.'**
+  String get welcomeHome;
 }
 
 class _AppLocalizationsDelegate

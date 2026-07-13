@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/features/data/widgets/custom_app_bar.dart';
+import 'package:medical/features/data/widgets/custom_home_list.dart';
 import 'package:medical/main.dart';
 
 import '../../../../l10n/app_localizations.dart';
@@ -53,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
-                    navigatorKey.currentState!.pushNamed(PageRouteName.favourite);
+                    navigatorKey.currentState!.pushNamed(
+                      PageRouteName.favourite,
+                    );
                   },
                   child: SizedBox(
                     child: Column(
@@ -68,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+                SizedBox(width: 20),
               ],
             ),
             SizedBox(height: 10),
@@ -79,6 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   selectedDate = date;
                 });
               },
+            ),
+            SizedBox(height: 30),
+            Expanded(
+              child: ListView.separated(
+                shrinkWrap: false,
+                itemBuilder: (context, index) {
+                  return CustomHomeList();
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 20),
+                itemCount: 10,
+              ),
             ),
           ],
         ),

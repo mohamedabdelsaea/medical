@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/features/data/widgets/custom_button.dart';
+import 'package:medical/features/domain/manager/home_cubit.dart';
 import 'package:medical/main.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -21,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Image.asset("assets/image/welcome.png"),
           ),
           Text(
-            "The patient will be monitored, cared for,\n and everything necessary \n will be done for him/her.",
+            local!.welcomeHome,
             style: TextStyle(
               color: AppColor.primary,
               fontWeight: FontWeight.w500,
@@ -30,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.090),
           CustomButton(
-            text: local!.logIn,
+            text: local.logIn,
             textColor: AppColor.white,
             buttonColor: AppColor.primary,
             onPressed: () {
@@ -45,6 +46,13 @@ class WelcomeScreen extends StatelessWidget {
             onPressed: () {
               navigatorKey.currentState!.pushNamed(PageRouteName.signUp);
             },
+          ),
+          SizedBox(height: 30),
+          GestureDetector(
+            onTap: () {
+              HomeCubit.get(context).changeLanguage();
+            },
+            child: Icon(Icons.language, size: 30, color: AppColor.primary),
           ),
         ],
       ),

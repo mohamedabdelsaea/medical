@@ -29,5 +29,10 @@
   "confirmNewPassword": "Confirm New Password",
   "changePassword": "Change Password",
   "cancel": "Cancel",
-  "yes": "Yes"
+  "language": "language",
+  "yes": "Yes",
+  "welcomeHome":
+  "The patient will be monitored, cared for,\n and everything necessary \n will be done for him/her."
 }
+
+

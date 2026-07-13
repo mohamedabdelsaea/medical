@@ -11,3 +11,7 @@ class InitialHomeState extends HomeState {
 class SelectedHomeState extends HomeState {
   SelectedHomeState();
 }
+
+class ChangeLanguageState extends HomeState {
+  ChangeLanguageState ();
+}
