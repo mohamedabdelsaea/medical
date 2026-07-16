@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:medical/features/domain/manager/home_cubit.dart';
 
 import '../../../core/theme/app_color.dart';
 
 class CustomHomeList extends StatelessWidget {
-  const CustomHomeList({super.key});
+  final int currentIndex;
+
+  const CustomHomeList({super.key, required this.currentIndex,});
 
   @override
   Widget build(BuildContext context) {
+    var doctor = HomeCubit.get(context).doctorList[currentIndex];
     return Container(
       width: double.infinity,
       height: 95,
@@ -23,7 +27,7 @@ class CustomHomeList extends StatelessWidget {
           children: [
             ClipOval(
               child: Image.asset(
-                "assets/image/doctor2.png",
+                doctor.image,
                 width: 56,
                 height: 56,
                 fit: BoxFit.cover,
@@ -49,7 +53,7 @@ class CustomHomeList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Dr. Olivia Turner, M.D.",
+                      doctor.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -60,7 +64,7 @@ class CustomHomeList extends StatelessWidget {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            "Dermato-Endocrinology.",
+                            doctor.specialty,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

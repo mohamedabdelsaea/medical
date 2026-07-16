@@ -4,6 +4,7 @@ import 'package:medical/features/domain/manager/home_cubit.dart';
 import '../../../core/route/page_route_name.dart';
 import '../../../core/theme/app_color.dart';
 import '../../../main.dart';
+import '../../domain/manager/profile_cubit/profile_cubit.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -13,18 +14,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    var profile = ProfileCubit.get(context).profile;
     return AppBar(
       leadingWidth: 180,
       leading: Row(
         children: [
           const SizedBox(width: 10),
           ClipOval(
-            child: Image.asset(
-              "assets/image/profile.png",
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-            ),
+            child: profile?.image != null && profile!.image!.isNotEmpty
+                ? Image.network(
+                    profile.image!,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    "assets/image/profile.png",
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
           ),
           const SizedBox(width: 10),
           Expanded(

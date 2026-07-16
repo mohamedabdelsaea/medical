@@ -3,6 +3,7 @@ import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/utils/auth/auth_fire_base.dart';
 import 'package:medical/features/data/widgets/custom_button_sheet.dart';
 import 'package:medical/features/data/widgets/custom_profile_item.dart';
+import 'package:medical/features/domain/manager/profile_cubit/profile_cubit.dart';
 import 'package:medical/main.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -13,6 +14,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context);
+    final profile = ProfileCubit.get(context).profile;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,12 +32,19 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipOval(
-              child: Image.asset(
-                "assets/image/profile.png",
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
+              child: profile?.image != null && profile!.image!.isNotEmpty
+                  ? Image.network(
+                      profile.image!,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      "assets/image/profile.png",
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(height: 20),
             Text(
@@ -47,42 +56,42 @@ class ProfileScreen extends StatelessWidget {
               title: local.profile,
               icon: Icons.person,
               routeName: PageRouteName.editProfile,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
               title: local.favourite,
               icon: Icons.favorite_border,
               routeName: PageRouteName.favourite,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
               title: local.payment,
               icon: Icons.payment_outlined,
               routeName: PageRouteName.payment,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
               title: local.privacy,
               icon: Icons.privacy_tip_outlined,
               routeName: PageRouteName.privacy,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
               title: local.setting,
               icon: Icons.settings,
               routeName: PageRouteName.setting,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             CustomProfileItem(
               title: local.help,
               icon: Icons.help,
               routeName: PageRouteName.help,
-              trailing:   Icons.arrow_forward_ios_outlined,
+              trailing: Icons.arrow_forward_ios_outlined,
             ),
             SizedBox(height: 20),
             Padding(

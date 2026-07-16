@@ -13,10 +13,10 @@ import 'package:medical/features/presentation/favourite/favourite_screen.dart';
 import 'package:medical/features/presentation/layout/home/home_screen.dart';
 import 'package:medical/features/presentation/layout/layout_screen.dart';
 import 'package:medical/features/presentation/layout/profile/edit_profile.dart';
-import 'package:medical/features/presentation/splash/splash_screen.dart';
-import 'package:medical/features/presentation/welcome/welcome_screen.dart';
 import '../../features/presentation/as_profile/notification/notification_screen.dart';
 import '../../features/presentation/as_profile/setting/setting_screen.dart';
+import '../../features/presentation/initial/splash/splash_screen.dart';
+import '../../features/presentation/initial/welcome/welcome_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings setting) {

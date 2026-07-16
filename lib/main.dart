@@ -8,16 +8,34 @@ import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_theme.dart';
 import 'package:medical/features/domain/manager/home_cubit.dart';
 import 'core/services/web_service.dart';
+import 'features/domain/manager/profile_cubit/profile_cubit.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await WebServices().initializeToken();
-  runApp(BlocProvider(create: (context) => HomeCubit(), child: const MyApp()));
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeCubit>(
+          create: (_) => HomeCubit(),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (_) => ProfileCubit()..loadProfile(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +54,9 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: HomeCubit.get(context).locale,
-          builder: EasyLoading.init(builder: BotToastInit()),
+          builder: EasyLoading.init(
+            builder: BotToastInit(),
+          ),
         );
       },
     );

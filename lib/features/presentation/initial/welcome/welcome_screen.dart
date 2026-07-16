@@ -4,7 +4,7 @@ import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/features/data/widgets/custom_button.dart';
 import 'package:medical/features/domain/manager/home_cubit.dart';
 import 'package:medical/main.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

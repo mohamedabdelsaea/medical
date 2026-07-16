@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:medical/core/route/page_route_name.dart';
 import 'package:medical/core/theme/app_color.dart';
 import 'package:medical/main.dart';
 import 'package:medical/core/utils/auth/auth_fire_base.dart';
-import '../../../l10n/app_localizations.dart';
+
+import '../../../../l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

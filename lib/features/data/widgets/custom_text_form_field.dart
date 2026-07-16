@@ -13,7 +13,6 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool enabled;
 
-  // اختياري
   final Widget? prefixIcon;
 
   const CustomTextFormField({

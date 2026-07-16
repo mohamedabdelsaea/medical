@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-
 import '../../../features/data/model/auth_model.dart';
 
 class ProfileService {
@@ -123,6 +124,39 @@ class ProfileService {
     await _users.doc(user.uid).delete();
 
     await user.delete();
+  }
+
+  static Future<String> uploadProfileImage(File image) async {
+    try {
+      final user = _auth.currentUser!;
+
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('${user.uid}.jpg');
+
+      final task = await ref.putFile(image);
+
+      debugPrint("Upload Success: ${task.metadata?.fullPath}");
+
+      final imageUrl = await ref.getDownloadURL();
+
+      debugPrint("Image URL: $imageUrl");
+
+      await user.updatePhotoURL(imageUrl);
+
+      await _users.doc(user.uid).update({
+        'image': imageUrl,
+      });
+
+      debugPrint("Firestore Updated");
+
+      return imageUrl;
+    } catch (e, s) {
+      debugPrint("Upload Error: $e");
+      debugPrintStack(stackTrace: s);
+      rethrow;
+    }
   }
 
   static void clearPasswordControllers() {

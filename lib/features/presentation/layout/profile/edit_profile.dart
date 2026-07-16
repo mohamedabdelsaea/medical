@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:medical/core/services/snack_bar_service.dart';
+import 'package:medical/features/domain/manager/profile_cubit/profile_cubit.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../core/utils/auth/auth_fire_base.dart';
 import '../../../../core/utils/auth/profile_service.dart';
@@ -19,6 +20,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   File? profileImage;
+  String? imageUrl;
 
   @override
   void initState() {
@@ -31,25 +33,33 @@ class _EditProfileState extends State<EditProfile> {
 
     if (profile == null) return;
 
+    imageUrl = profile.image;
+
     AuthFireBase.nameController.text = profile.name!;
     AuthFireBase.phoneController.text = profile.phone!;
     AuthFireBase.emailController.text = profile.email!;
     AuthFireBase.birthDateController.text = profile.birthDate!;
 
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var local = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             navigatorKey.currentState!.pop();
           },
-          icon: Icon(Icons.arrow_back_ios_new, color: AppColor.primary),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: AppColor.primary,
+          ),
         ),
         title: Text(
           local!.updateProfile,
@@ -68,13 +78,26 @@ class _EditProfileState extends State<EditProfile> {
             children: [
               CustomProfileImage(
                 profileImage: profileImage,
-                onImageSelected: (image) {
+                imageUrl: imageUrl,
+                onImageSelected: (image) async {
+                  final profileCubit = ProfileCubit.get(context);
+
                   setState(() {
                     profileImage = image;
                   });
+
+                  final url = await ProfileService.uploadProfileImage(image);
+
+                  if (!mounted) return;
+
+                  await profileCubit.loadProfile();
+
+                  setState(() {
+                    imageUrl = url;
+                  });
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 local.fullName,
                 style: TextStyle(
@@ -83,14 +106,14 @@ class _EditProfileState extends State<EditProfile> {
                   color: AppColor.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CustomTextFormField(
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "Enter Your Full Name",
                 controller: AuthFireBase.nameController,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 local.phone,
                 style: TextStyle(
@@ -99,15 +122,15 @@ class _EditProfileState extends State<EditProfile> {
                   color: AppColor.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CustomTextFormField(
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "+20112233456",
                 controller: AuthFireBase.phoneController,
-                keyboardType: TextInputType.numberWithOptions(),
+                keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 local.email,
                 style: TextStyle(
@@ -116,15 +139,14 @@ class _EditProfileState extends State<EditProfile> {
                   color: AppColor.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CustomTextFormField(
                 width: size.width * 0.9,
                 isPassword: false,
                 hintText: "Enter Your Email",
                 controller: AuthFireBase.emailController,
               ),
-              SizedBox(height: 10),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 local.dateOfBirth,
                 style: TextStyle(
@@ -133,7 +155,7 @@ class _EditProfileState extends State<EditProfile> {
                   color: AppColor.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CustomTextFormField(
                 width: size.width * 0.9,
                 isPassword: false,
@@ -148,21 +170,23 @@ class _EditProfileState extends State<EditProfile> {
                   buttonColor: AppColor.primary,
                   textColor: AppColor.white,
                   onPressed: () async {
+                    final profileCubit = ProfileCubit.get(context);
+
                     await ProfileService.updateProfile(
                       name: AuthFireBase.nameController.text.trim(),
                       phone: AuthFireBase.phoneController.text.trim(),
                       birthDate: AuthFireBase.birthDateController.text.trim(),
                     );
 
-                    if (AuthFireBase.emailController.text.trim() !=
-                        AuthFireBase.currentEmail) {}
+                    if (!mounted) return;
 
-                    if (mounted) {
-                      navigatorKey.currentState!.pop();
-                      SnackBarService.showSuccessMessage(
-                        "Profile Updated Successfully",
-                      );
-                    }
+                    await profileCubit.loadProfile();
+
+                    navigatorKey.currentState!.pop();
+
+                    SnackBarService.showSuccessMessage(
+                      "Profile Updated Successfully",
+                    );
                   },
                 ),
               ),
